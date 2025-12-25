@@ -23,7 +23,10 @@ export interface EntityProfile {
     id: string;
     type: 'character' | 'place' | 'institution' | 'object';
     name: string;
-    canonicalFacts: string[];
+    canonicalFacts: {
+        fact: string;
+        chapterId: string;
+    }[];
     timeline: {
         chapterId: string;
         motivation: string;

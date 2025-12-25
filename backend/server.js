@@ -331,8 +331,13 @@ Return strictly valid JSON in this format:
 
                 // Add new facts if not already present
                 extracted.newFacts.forEach(fact => {
-                    if (!profile.canonicalFacts.includes(fact)) {
-                        profile.canonicalFacts.push(fact);
+                    // Check if fact exists (ignoring chapterId for uniqueness check to avoid dupes)
+                    const exists = profile.canonicalFacts.some(f => f.fact === fact);
+                    if (!exists) {
+                        profile.canonicalFacts.push({
+                            fact: fact,
+                            chapterId: chapter.id
+                        });
                     }
                 });
 
@@ -532,7 +537,10 @@ app.post('/chat', async (req, res) => {
           ${selectedText ? `User (The Author) has SELECTED this text to discuss with you: "${selectedText}"` : ''}
           
           CHARACTER BRAIN (Canonical Facts):
-          ${profile.canonicalFacts.map(f => `- ${f}`).join('\n')}
+          ${profile.canonicalFacts
+                    .filter(f => !f.chapterId || (chapterIds.indexOf(f.chapterId) !== -1 && chapterIds.indexOf(f.chapterId) <= currentIdx))
+                    .map(f => `- ${f.fact}`)
+                    .join('\n')}
           
           TIMELINE HISTORY (Scoped to current chapter):
           ${filteredTimeline.map(t => `- Chapter ${t.chapterId}: ${t.status} (Motivation: ${t.motivation})`).join('\n')}
