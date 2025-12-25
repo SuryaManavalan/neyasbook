@@ -1,0 +1,23 @@
+{
+  "title": "Arenya: Astral",
+  "description": "Arenya is a restless journalist stuck writing viral fluff-until a string of sudden, unexplained deaths sparks her curiosity. As she digs deeper, patterns begin to emerge, pointing toward something far stranger than she anticipated. Set in a sharply modern San Francisco, this slow-burning mystery blends realism with echoes of the uncanny, hinting at forces long buried-and quietly stirring.",
+  "hierarchy": [
+    {
+      "id": "p1",
+      "type": "part",
+      "title": "Volume I",
+      "children": [
+        {
+          "id": "1",
+          "type": "chapter",
+          "title": "Chapter One: Third Place Glory"
+        },
+        {
+          "id": "1p77zlqgt",
+          "type": "chapter",
+          "title": "Chapter Two: Something in the Air"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "brooke",
+  "name": "Brooke",
+  "type": "character",
+  "canonicalFacts": [
+    "Has a prestigious resume that includes attending Columbia J-School.",
+    "Fluent in French and has interviewed the president of Iceland.",
+    "Often wears neutral clothing and embodies a polished appearance."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Brooke is a colleague of Arenya's who has established herself in a prestigious journalism career and is aware of the tension between her and Arenya.",
+      "motivation": "To advise Arenya to temper her ambitions and focus on safer, more acceptable journalism topics."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "the-mission",
+  "name": "The Mission",
+  "type": "place",
+  "canonicalFacts": [
+    "Arenya's studio apartment is well-kept due to her absence.",
+    "The Mission is part of the vibrant and trendy landscape of San Francisco."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Arenya's neighborhood, where she resides in her studio apartment.",
+      "motivation": "The area reflects her current lifestyle and isolation."
+    }
+  ]
+}

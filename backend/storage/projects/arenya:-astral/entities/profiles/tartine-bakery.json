@@ -1,0 +1,17 @@
+{
+  "id": "tartine-bakery",
+  "name": "Tartine Bakery",
+  "type": "institution",
+  "canonicalFacts": [
+    "Known for its comforting smells and history, with a strong local reputation.",
+    "Witnessed a sudden death that is central to Arenya's investigation."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "The bakery where Yuri collapsed, noted for its warm ambiance and nostalgic atmosphere.",
+      "motivation": "To serve as a community gathering place and a site of tragedy and mystery."
+    }
+  ]
+}

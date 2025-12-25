@@ -1,0 +1,27 @@
+{
+  "id": "arenya",
+  "name": "Arenya",
+  "type": "character",
+  "canonicalFacts": [
+    "Arenya received recognition for her article on dog breeds.",
+    "She feels trapped in her current job focusing on light-hearted articles.",
+    "She harbors a desire to chase important stories.",
+    "Has written three articles since her previous notable piece.",
+    "Feels resentment towards her role and the superficial topics she has covered.",
+    "Decides to pursue the story of the unexplained deaths despite her boss's disapproval."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Arenya is called into Teddy's office to discuss her successful article but reflects on her disillusionment with her current role in journalism.",
+      "motivation": "She wants to pursue deeper and more meaningful stories rather than write about trivial topics."
+    },
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Arenya is investigating a series of unexplained deaths in San Francisco, trying to pitch the story to her boss Teddy, and gathering information from witnesses.",
+      "motivation": "To uncover the mystery behind the sudden deaths occurring in the city, driven by a need to validate her instincts as a journalist."
+    }
+  ]
+}

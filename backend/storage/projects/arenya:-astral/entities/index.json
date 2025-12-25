@@ -1,0 +1,62 @@
+[
+  {
+    "id": "arenya",
+    "name": "Arenya",
+    "type": "character"
+  },
+  {
+    "id": "teddy",
+    "name": "Teddy",
+    "type": "character"
+  },
+  {
+    "id": "marla",
+    "name": "Marla",
+    "type": "character"
+  },
+  {
+    "id": "saiesh",
+    "name": "Saiesh",
+    "type": "character"
+  },
+  {
+    "id": "fatima",
+    "name": "Fatima",
+    "type": "character"
+  },
+  {
+    "id": "san-francisco",
+    "name": "San Francisco",
+    "type": "place"
+  },
+  {
+    "id": "the-mission",
+    "name": "The Mission",
+    "type": "place"
+  },
+  {
+    "id": "brooke",
+    "name": "Brooke",
+    "type": "character"
+  },
+  {
+    "id": "yuri-melnikov",
+    "name": "Yuri Melnikov",
+    "type": "character"
+  },
+  {
+    "id": "galina",
+    "name": "Galina",
+    "type": "character"
+  },
+  {
+    "id": "ava",
+    "name": "Ava",
+    "type": "character"
+  },
+  {
+    "id": "tartine-bakery",
+    "name": "Tartine Bakery",
+    "type": "institution"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "yuri-melnikov",
+  "name": "Yuri Melnikov",
+  "type": "character",
+  "canonicalFacts": [
+    "Was a 62-year-old retired architect and a Russian immigrant.",
+    "Had no known health issues and was a regular at the bakery.",
+    "Collapsed shortly after exhibiting a terrified expression."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Yuri is one of the victims of the unexplained deaths, described as having suddenly collapsed in Tartine Bakery.",
+      "motivation": "N/A (deceased)"
+    }
+  ]
+}

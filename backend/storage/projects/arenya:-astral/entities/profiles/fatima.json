@@ -1,0 +1,17 @@
+{
+  "id": "fatima",
+  "name": "Fatima",
+  "type": "character",
+  "canonicalFacts": [
+    "Fatima works at a health tech startup.",
+    "She recently got engaged, reflecting a rapid pace in her life."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Fatima is mentioned in a group chat as being engaged.",
+      "motivation": "Her success and personal milestones seem to reflect societal expectations."
+    }
+  ]
+}

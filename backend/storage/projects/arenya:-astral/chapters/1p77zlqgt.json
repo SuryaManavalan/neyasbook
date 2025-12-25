@@ -1,0 +1,661 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Arenya had become disturbingly efficient at sounding enthusiastic about topics she didn’t care about."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In the two weeks since her “Third Place Glory” moment, she had written three more articles: Top Five Hamster Habitats That Spark Joy, Is Your Cat Gaslighting You?, and Why Goldendoodles Are the Therapy We All Need in 2025—which, by sheer accident, hit number five in likes thanks to a TikTok micro-influencer reposting it with the caption “I feel seen.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She hated how good she was at this."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Every morning, she walked past the same coffee cart, nodded at the same barista, and took the same spot near the window in the open-plan office she quietly loathed. Every afternoon, she ate some variety of prepackaged sadness and listened to Brooke in the next pod over take a smug call with a contact in Brussels or Qatar or wherever her latest “real journalism” piece was taking her."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Brooke had the kind of résumé that made other résumés shrivel. Columbia J-School. Fluent in French. Once interviewed the president of Iceland. Her face was angular in a way that suggested both good genetics and expensive skincare. She always wore neutrals. Never spilled anything. "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "They had not, technically, ever gotten into a fight. But the tension lived in the air between them, like too much perfume."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "It was during a staff meeting on Tuesday morning, just as Teddy was rambling about “Q2 engagement optimization,” that Arenya saw it—just a blur of a headline in a sidebar as she minimized her calendar window:"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Another Sudden Death in SoMa — Third This Week.” "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She clicked."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The article was shallow. Barely more than a police statement. A 34-year-old man had collapsed while walking his dog. Sudden aneurysm. No history. No preexisting conditions. Just gone."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She searched for more. Two others. One 19, one 62. Same sudden cerebral failure. All within the past month. No patterns. No apparent connection. But they all lived in the city. All local. All random."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "And all recent."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "By lunch, she had found five more from earlier in the month. Seven people. Seven sudden, inexplicable deaths. Before that—nothing. Not a cluster. Not even a blip."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "It wasn’t much. But it was something."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She knocked on Teddy’s glass door. He was eating a salad the size of a small child and watching a dog video with an intensity that suggested religious experience."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Hey, boss. Can I run something by you?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Always,” he said, mouth full of kale. “Shoot.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She laid it out carefully. Seven cases. Rapid-onset aneurysms. All within San Francisco. All in the last four weeks. Healthy people. No history. One of them had collapsed in line at Tartine Bakery."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Something’s going on,” she finished. “It might be environmental. Or something new. But I think it’s worth looking into. Even just as a public interest piece.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Teddy dabbed his mouth with a napkin like a southern belle. “Renny, I love that you want to dig. Really. That’s the spirit I hired you for.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She waited for the but."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“But,” he continued, “this isn’t our lane. We don’t want to spread fear. People already think everything’s killing them—5G, oat milk, daylight savings. And unless the city’s issued a warning or the CDC’s chiming in, it just sounds like paranoia. Stick to dogs, please. You’ve got a knack for those.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“I’m not saying it’s a conspiracy,” she pushed. “I just think it’s… weird. There’s a pattern. I want to talk to a few witnesses, maybe dig a little. I’ll write the hamster piece, too. I just—”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Renny,” he interrupted, voice softening in a way that felt more condescending than kind, “don’t overthink it. You’re doing great. Don’t burn yourself out chasing ghosts.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She left the office with her jaw tight and her palms sweating."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "At her desk, Brooke looked up from a sleek, black notebook."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Let me guess,” she said, smirking. “Tried to pitch a piece about urban brain fog or mass psychogenic illness?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“No,” Arenya said coolly. “I pitched a piece about a cluster of unexplained deaths.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Brooke raised a perfectly plucked brow. “And he turned it down.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Arenya didn’t answer."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Brooke leaned back in her chair. “Look, I get it. You want the serious stuff. We all do. But it’s not just about instincts. It’s about trust. Editors need to know you can handle it before they let you near the sharp knives.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Thanks for the wisdom, Brooke.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Anytime,” she said, already turning back to her notes."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "By the end of the day, Arenya had made her decision."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She wasn’t going to wait for Teddy’s approval. Or for Brooke’s crumbs of validation. She’d start small—just a few locations, a few names. Ask around. Something was off. She could feel it, bone-deep."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She opened a fresh Google Doc and typed a title at the top:"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Unexplained Deaths in San Francisco: A Pattern Emerging?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Then she grabbed her coat and backpack, slung her press badge around her neck, and walked out into the fog."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Something was happening."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "And she wasn’t going to let it slip past her."
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "(continued)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The bakery still smelled like warm sugar and old brick, the kind of place that made you nostalgic for things you’d never actually experienced. Tartine. A San Francisco institution. Two days ago, a man had dropped dead five feet from the counter."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "His name was Yuri Melnikov. Sixty-two. Russian immigrant. Retired architect. A regular, according to the staff. “Always ordered the morning bun and a double espresso. Sat by the window. Wore the same navy scarf even when it wasn’t cold.” That was from the barista, Ava, a grad student with a nervous blink who had watched Yuri die while foaming oat milk."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“I just remember how quiet it got,” she said, eyes flicking to the spot by the window. “Like, the room just… paused.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“What do you mean?” Arenya asked, notebook open."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Ava swallowed. “He looked over his shoulder. Hard. Like—whipped around. I thought maybe someone yelled his name. But no one had. He just stared at this group sitting near the back. Four people. All with laptops. I don’t know if he knew them. But he looked at them like—”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Like what?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Like he saw something awful. Like he knew something terrible. His face was… I don’t know. Frozen. And then he just stayed like that. For almost a minute. Didn’t move. Didn’t blink. And then he dropped.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Arenya took that in, her pen stilling against the paper. “And the people he stared at?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Ava shook her head. “They left. After the paramedics came. Quietly. I didn’t even get a good look.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She visited Yuri’s family next. His wife, Galina, welcomed her in with polite exhaustion. Their apartment was filled with warm lighting and framed architectural sketches. Galina offered tea. Arenya accepted, out of guilt if nothing else."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“He was healthy,” Galina said firmly. “Walked every day. Played chess with his brother on Saturdays. His last physical was perfect. No warning signs.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“Did he seem stressed lately? Different?”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "“No,” Galina said, her accent thickening with emotion. “He was content. Happy even. He loved this city. Loved his little rituals. And then, just like that—” She snapped her fingers. “Gone.”"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Arenya thanked her, took the tea in a paper cup, and walked the block twice before sitting on a bench to process."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This wasn’t a coincidence. It couldn’t be."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A healthy man freezing like a statue in a bakery, staring down strangers, collapsing in front of half a dozen witnesses? It wasn’t natural. It wasn’t random."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She spent the rest of the day chasing leads that didn’t pan out—no CCTV footage from the bakery, no luck tracking down the laptop group who had left just before the ambulance arrived. It felt like the moment was already evaporating, like the city wanted to forget this ever happened."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "That night, she returned to her apartment, brain humming like a fridge, thoughts ricocheting around her skull. She tossed her coat on the chair, sat cross-legged on the floor, and pulled out her notes."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Yuri Melnikov. No preexisting conditions. Death by aneurysm. Facial expression: horrified. Witnesses: five. Unknown observers: four. Connection to other deaths: unclear."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The wind outside howled against the windows, the kind of deep city gust that felt like it was searching for a way in."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "She stared at the wall."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "What was he looking at?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "By midnight, she’d taped the names of all seven victims to her bedroom wall with sticky notes and drawn lines in pencil between them like she was building a conspiracy board from a thriller. No connections. Not yet. But patterns didn’t shout—they whispered."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Tomorrow she’d rest. Maybe."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "But Monday, she was going to talk to the sister of the teenager who died in Glen Park. Then maybe the yoga teacher who found the elderly woman slumped over in Dolores."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "It wasn’t just a story anymore."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "It was a puzzle."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "And something deep in her bones needed to know what the hell was going on."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Perfect. Here’s Chapter Three, continuing Arenya’s investigation with the emerging pattern of the deaths, the awkward family pressure, and the mysterious warning from Susmithaa Aunty that subtly cracks open the door to the supernatural. The tone still balances realism with an increasing sense of unease, while letting us dive deeper into Arenya’s inner world."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "hardBreak"
+        }
+      ]
+    }
+  ]
+}

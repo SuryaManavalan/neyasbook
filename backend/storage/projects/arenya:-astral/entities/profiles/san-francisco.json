@@ -1,0 +1,25 @@
+{
+  "id": "san-francisco",
+  "name": "San Francisco",
+  "type": "place",
+  "canonicalFacts": [
+    "San Francisco is described as having glossy buildings and expensive living.",
+    "The city serves as a significant part of Arenya's personal narrative.",
+    "The city is currently experiencing a series of unexplained sudden deaths among seemingly healthy individuals.",
+    "It is represented as a vibrant urban environment that contrasts with the dark nature of the events."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "The backdrop of Arenya's daily life, representing both opportunity and existential dread.",
+      "motivation": "It serves as a symbol of dreams and modern living."
+    },
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "The city where the sudden deaths are occurring, serving as the backdrop for Arenya's investigation.",
+      "motivation": "N/A"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "saiesh",
+  "name": "Saiesh",
+  "type": "character",
+  "canonicalFacts": [
+    "Saiesh works on AI models related to agriculture.",
+    "He has expressed feelings for Arenya in the past.",
+    "He brings snacks for her during his visits."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Saiesh visits Arenya, bringing snacks and providing emotional support.",
+      "motivation": "To comfort Arenya and maintain their close friendship."
+    }
+  ]
+}

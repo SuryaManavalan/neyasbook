@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  body {
+    @apply font-sans;
+  }
+
+  /* Tiptap Editor Styles */
+  .ProseMirror {
+    outline: none;
+    @apply font-serif text-lg leading-relaxed;
+  }
+
+  .ProseMirror p {
+    @apply mb-4;
+  }
+
+  .ProseMirror h1 {
+    @apply text-5xl font-display mb-12 mt-4 text-ink;
+  }
+
+  .ProseMirror > *:first-child {
+    @apply text-6xl font-display mb-16 text-ink/90 italic tracking-tight;
+  }
+
+  .ProseMirror h2 {
+    @apply text-2xl font-display mb-6 mt-10;
+  }
+}
+
+.paper-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+}
+
+/* Custom Scrollbar for the antique look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-ink/10 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-ink/20;
+}

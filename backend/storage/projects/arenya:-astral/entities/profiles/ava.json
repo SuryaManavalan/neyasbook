@@ -1,0 +1,17 @@
+{
+  "id": "ava",
+  "name": "Ava",
+  "type": "character",
+  "canonicalFacts": [
+    "Is a graduate student.",
+    "Describes Yuri's last moments with clarity, indicating he seemed to perceive something terrifying before collapsing."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Ava is a barista at Tartine Bakery who witnessed Yuri's death and provides details to Arenya.",
+      "motivation": "To recount her experience and the eerie circumstances surrounding Yuri's death."
+    }
+  ]
+}

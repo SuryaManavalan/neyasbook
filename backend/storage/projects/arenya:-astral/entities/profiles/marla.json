@@ -1,0 +1,17 @@
+{
+  "id": "marla",
+  "name": "Marla",
+  "type": "character",
+  "canonicalFacts": [
+    "Marla has a dry sense of humor.",
+    "She seems to be accustomed to delivering news of significance in a calm manner."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Marla delivers the news to Arenya that Teddy is ready to see her.",
+      "motivation": "To perform her role as the office manager with efficiency."
+    }
+  ]
+}

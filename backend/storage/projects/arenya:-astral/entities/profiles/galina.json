@@ -1,0 +1,17 @@
+{
+  "id": "galina",
+  "name": "Galina",
+  "type": "character",
+  "canonicalFacts": [
+    "Identified as a supportive partner who is deeply affected by Yuri's unexplained death.",
+    "Her home reflects Yuri's architectural background with sketches displayed."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Galina is the widow of Yuri Melnikov, who shares personal memories and details about Yuri's life and health with Arenya.",
+      "motivation": "To express her grief and the shock of Yuri's sudden death while seeking some understanding of what happened."
+    }
+  ]
+}

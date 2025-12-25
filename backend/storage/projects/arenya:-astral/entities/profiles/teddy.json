@@ -1,0 +1,26 @@
+{
+  "id": "teddy",
+  "name": "Teddy",
+  "type": "character",
+  "canonicalFacts": [
+    "Teddy has a jovial personality and a casual relationship with Arenya.",
+    "He refers to her as 'Renny', suggesting familiarity.",
+    "He is invested in the company’s marketing and audience engagement.",
+    "Encourages Arenya's investigative spirit but believes the current topic isn’t aligned with the publication’s focus.",
+    "Tends to eat large salads while multitasking during meetings."
+  ],
+  "timeline": [
+    {
+      "chapterId": "1",
+      "chapterTitle": "Chapter One: Third Place Glory",
+      "status": "Teddy congratulates Arenya for her article's success, using his usual jovial demeanor.",
+      "motivation": "He aims to encourage Arenya and possibly get her to write more articles that attract readership."
+    },
+    {
+      "chapterId": "1p77zlqgt",
+      "chapterTitle": "Chapter Two: Something in the Air",
+      "status": "Teddy is Arenya's boss who appreciates her enthusiasm but ultimately dismisses her story pitch about the unexplained deaths.",
+      "motivation": "To maintain editorial integrity and avoid creating unjustified public fear regarding the deaths."
+    }
+  ]
+}
