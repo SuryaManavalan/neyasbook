@@ -100,7 +100,7 @@ export default function App() {
     const [mentionPosition, setMentionPosition] = useState<{ top: number, left: number } | null>(null)
     const [mentions, setMentions] = useState<{ id: string, name: string, type: string }[]>([])
 
-    const API_BASE = 'http://localhost:3001'
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
     const scrollRef = useRef<HTMLDivElement>(null)
     const lastGreetedChapterId = useRef<string | null>(null)
@@ -1008,7 +1008,6 @@ export default function App() {
                                             entities={entities}
                                             manifest={manifest}
                                             onSelect={handleMentionSelect}
-                                            onClose={() => setMentionPosition(null)}
                                         />
                                     )}
                                     <textarea
@@ -1121,12 +1120,11 @@ function NavItem({ icon, label, active, secondary, onClick }: {
     )
 }
 
-function MentionDropdown({ query, entities, manifest, onSelect, onClose }: {
+function MentionDropdown({ query, entities, manifest, onSelect }: {
     query: string,
     entities: any[],
     manifest: any,
-    onSelect: (item: any) => void,
-    onClose: () => void
+    onSelect: (item: any) => void
 }) {
     const chapters = manifest?.hierarchy.flatMap((p: any) => p.children.map((c: any) => ({ ...c, type: 'chapter' }))) || [];
     const allItems = [...entities, ...chapters.map((c: any) => ({ ...c, name: c.title }))];

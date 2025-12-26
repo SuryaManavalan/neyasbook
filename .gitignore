@@ -32,3 +32,14 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# AWS Credentials
+neyasbook-deployer_accessKeys.csv
+*.csv
+
+# AWS CLI installer
+awscliv2.zip
+aws/
+
+# CDK build artifacts
+backend/cdk.out/
