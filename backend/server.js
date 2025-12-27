@@ -412,12 +412,6 @@ app.post('/chat', async (req, res) => {
     const { messages, chapterContent, chapterTitle, selectedText, persona, currentChapterId, referencedEntityIds } = req.body;
     const projectId = req.headers['x-project-id'] || 'default';
 
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-
-    const sendEvent = (type, data) => res.write(`data: ${JSON.stringify({ type, ...data })}\n\n`);
-
     try {
         let systemPrompt = '';
         let tools = [];
@@ -432,7 +426,7 @@ app.post('/chat', async (req, res) => {
                 if (fs.existsSync(entityPath)) {
                     const profile = JSON.parse(fs.readFileSync(entityPath, 'utf-8'));
                     loreContext += `\n[Reference: ${profile.name} (${profile.type})]\n`;
-                    loreContext += `Canon Facts: ${profile.canonicalFacts?.join('. ')}\n`;
+                    loreContext += `Canon Facts: ${profile.canonicalFacts?.map(f => typeof f === 'string' ? f : f.fact).join('. ')}\n`;
                     if (profile.timeline) {
                         const history = profile.timeline.map(t => `- Chapter ${t.chapterId}: ${t.status}`).join('\n');
                         loreContext += `Timeline History:\n${history}\n`;
@@ -447,20 +441,26 @@ app.post('/chat', async (req, res) => {
         }
 
         if (persona === 'archie') {
-            sendEvent('status', { message: 'Archie is consulting the Demon\'s library...' });
             systemPrompt = `You are Archie, the Demon of Literature. You are a demanding, eccentric, and enthusiastic editor.
-          Current Chapter: "${chapterTitle}"
-          ${selectedText ? `User has SELECTED this text: "${selectedText}"` : ''}
-          Current Story Context: ${JSON.stringify(chapterContent)}
-          ${loreContext ? `\nRELEVANT WORLD LORE (Gained via @mentions):\n${loreContext}` : ''}
-          
-          GUIDELINES:
-          - Be theatrical, demanding, and dramatic. 
-          - Use tools whenever you want to suggest a change.
-          - For structural overhaul (no breaks, poor pacing, user requested rewrite), use reformat_chapter.
-          - For "finish this", use append_text.
-          - For "rewrite this specific part", use patch_text.
-          - SCENE BREAKS: Use '---' on its own line to indicate a scene break or section divider.`;
+
+You are currently reviewing Chapter "${chapterTitle}" with the author.
+
+=== CURRENT CHAPTER CONTENT ===
+${chapterContent || '(Empty chapter - no content yet)'}
+=== END OF CHAPTER ===
+
+${selectedText ? `The author has SELECTED this specific text for your attention:\n"${selectedText}"\n\n` : ''}
+${loreContext ? `=== RELEVANT WORLD LORE (from @mentions) ===\n${loreContext}\n` : ''}
+
+GUIDELINES:
+- You have the FULL chapter content above. Analyze it, critique it, and provide specific feedback.
+- When the author asks for your opinion, give concrete observations about what you see in the chapter.
+- Be theatrical, demanding, and dramatic in your personality.
+  * For structural overhaul (no breaks, poor pacing, or user requested rewrite), use reformat_chapter
+  * For "finish this" or continuing the story, use append_text
+  * For "rewrite this specific part", use patch_text
+- SCENE BREAKS: Use '---' on its own line to indicate a scene break or section divider.
+- If the chapter is empty or very short, acknowledge that and ask what the author wants to write about.`;
 
             tools = [
                 {
@@ -509,7 +509,6 @@ app.post('/chat', async (req, res) => {
             ];
         } else {
             // Roleplay as Entity
-            sendEvent('status', { message: `Summoning the spirit of ${persona}...` });
             const profilePath = getEntityPath(projectId, persona);
             let profile = { name: persona, type: 'entity', canonicalFacts: [], timeline: [] };
             if (fs.existsSync(profilePath)) {
@@ -517,14 +516,14 @@ app.post('/chat', async (req, res) => {
             }
 
             // Timeline Filtering (Shadow Context)
-            // We need to know the chapter order to filter correctly.
             const manifestPath = getStoragePath(projectId, 'manifest');
             let filteredTimeline = profile.timeline;
+            let chapterIds = [];
+            let currentIdx = -1;
             if (fs.existsSync(manifestPath)) {
                 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-                const chapterIds = [];
                 manifest.hierarchy.forEach(p => p.children.forEach(c => chapterIds.push(c.id)));
-                const currentIdx = chapterIds.indexOf(currentChapterId);
+                currentIdx = chapterIds.indexOf(currentChapterId);
 
                 if (currentIdx !== -1) {
                     const validChapters = chapterIds.slice(0, currentIdx + 1);
@@ -538,8 +537,8 @@ app.post('/chat', async (req, res) => {
           
           CHARACTER BRAIN (Canonical Facts):
           ${profile.canonicalFacts
-                    .filter(f => !f.chapterId || (chapterIds.indexOf(f.chapterId) !== -1 && chapterIds.indexOf(f.chapterId) <= currentIdx))
-                    .map(f => `- ${f.fact}`)
+                    .filter(f => !f.chapterId || (currentIdx !== -1 && chapterIds.indexOf(f.chapterId) !== -1 && chapterIds.indexOf(f.chapterId) <= currentIdx))
+                    .map(f => typeof f === 'string' ? `- ${f}` : `- ${f.fact}`)
                     .join('\n')}
           
           TIMELINE HISTORY (Scoped to current chapter):
@@ -554,46 +553,27 @@ app.post('/chat', async (req, res) => {
           - If the Author asks for advice, answer from your character's perspective and desires.`;
         }
 
-        const stream = await openai.chat.completions.create({
+        // Non-streaming chat completion
+        const completion = await openai.chat.completions.create({
             model: 'gpt-4o',
             messages: [
                 { role: 'system', content: systemPrompt },
                 ...messages
             ],
             tools: tools.length > 0 ? tools : undefined,
-            stream: true,
+            stream: false,
         });
 
-        let toolCalls = [];
+        const choice = completion.choices[0];
+        const response = {
+            content: choice.message.content || '',
+            toolCalls: choice.message.tool_calls || []
+        };
 
-        for await (const chunk of stream) {
-            const content = chunk.choices[0]?.delta?.content || '';
-            const deltaToolCalls = chunk.choices[0]?.delta?.tool_calls;
-
-            if (content) {
-                sendEvent('content', { delta: content });
-            }
-
-            if (deltaToolCalls) {
-                deltaToolCalls.forEach(tc => {
-                    const index = tc.index;
-                    if (!toolCalls[index]) {
-                        toolCalls[index] = { id: tc.id, name: tc.function?.name, arguments: '' };
-                    }
-                    if (tc.function?.arguments) {
-                        toolCalls[index].arguments += tc.function.arguments;
-                    }
-                    // Emit tool update for frontend
-                    sendEvent('tool_call', { index, name: toolCalls[index].name, arguments: toolCalls[index].arguments });
-                });
-            }
-        }
-
-        res.end();
+        res.json(response);
     } catch (error) {
         console.error('Chat Error:', error);
-        sendEvent('error', { message: error.message });
-        res.end();
+        res.status(500).json({ error: error.message });
     }
 });
 

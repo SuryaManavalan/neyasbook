@@ -3,6 +3,9 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import { Construct } from 'constructs';
 import * as path from 'path';
 
@@ -22,22 +25,45 @@ export class NeyasbookStack extends cdk.Stack {
             removalPolicy: cdk.RemovalPolicy.RETAIN, // Don't delete data on stack destroy
         });
 
-        // 2. Frontend S3 Bucket (for static website hosting)
+        // 2. Frontend S3 Bucket (for CloudFront)
         const websiteBucket = new s3.Bucket(this, 'WebsiteBucket', {
-            websiteIndexDocument: 'index.html',
-            websiteErrorDocument: 'index.html', // SPA routing
-            publicReadAccess: true,
-            blockPublicAccess: new s3.BlockPublicAccess({
-                blockPublicAcls: false,
-                blockPublicPolicy: false,
-                ignorePublicAcls: false,
-                restrictPublicBuckets: false,
-            }),
             removalPolicy: cdk.RemovalPolicy.DESTROY,
             autoDeleteObjects: true,
         });
 
-        // 3. Backend Lambda Function
+        // 3. Import existing SSL certificate
+        const certificate = acm.Certificate.fromCertificateArn(
+            this,
+            'Certificate',
+            'arn:aws:acm:us-east-1:968267201240:certificate/7f0d8a50-a537-47e1-ac1e-d07434dd666b'
+        );
+
+        // 4. CloudFront Distribution with custom domain
+        const distribution = new cloudfront.Distribution(this, 'Distribution', {
+            defaultBehavior: {
+                origin: new origins.S3Origin(websiteBucket),
+                viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+            },
+            domainNames: ['neyasbook.com', 'www.neyasbook.com'],
+            certificate: certificate,
+            defaultRootObject: 'index.html',
+            errorResponses: [
+                {
+                    httpStatus: 404,
+                    responseHttpStatus: 200,
+                    responsePagePath: '/index.html', // SPA routing
+                },
+                {
+                    httpStatus: 403,
+                    responseHttpStatus: 200,
+                    responsePagePath: '/index.html',
+                },
+            ],
+            comment: 'Neyasbook with custom domain',
+        });
+
+        // 5. Backend Lambda Function
         const apiLambda = new lambda.Function(this, 'ApiHandler', {
             runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'lambda.handler',
@@ -51,7 +77,7 @@ export class NeyasbookStack extends cdk.Stack {
                     'cdk.json',
                 ],
             }),
-            timeout: cdk.Duration.minutes(2),
+            timeout: cdk.Duration.minutes(5),
             memorySize: 512,
             environment: {
                 STORY_BUCKET: storyBucket.bucketName,
@@ -62,10 +88,15 @@ export class NeyasbookStack extends cdk.Stack {
         // Grant S3 permissions
         storyBucket.grantReadWrite(apiLambda);
 
-        // 5. API Gateway HTTP API - Routes to Lambda
+        // 4. API Gateway HTTP API - Routes to Lambda
         const api = new apigateway.HttpApi(this, 'NeyasbookApi', {
             corsPreflight: {
-                allowHeaders: ['Authorization', 'Content-Type', '*'],
+                allowHeaders: [
+                    'Authorization',
+                    'Content-Type',
+                    'X-Requested-With',
+                    'x-project-id',
+                ],
                 allowMethods: [
                     apigateway.CorsHttpMethod.GET,
                     apigateway.CorsHttpMethod.POST,
@@ -73,7 +104,14 @@ export class NeyasbookStack extends cdk.Stack {
                     apigateway.CorsHttpMethod.DELETE,
                     apigateway.CorsHttpMethod.OPTIONS,
                 ],
-                allowOrigins: ['*'], // Update with your domain in production
+                allowOrigins: [
+                    'https://neyasbook.com',
+                    'https://www.neyasbook.com',
+                    'https://d3bb1209mgsq4w.cloudfront.net',
+                    'http://localhost:5173',
+                    'http://localhost:3000',
+                ],
+                maxAge: cdk.Duration.days(1),
             },
         });
 
@@ -87,13 +125,21 @@ export class NeyasbookStack extends cdk.Stack {
         });
 
         // Outputs
+        new cdk.CfnOutput(this, 'CloudFrontURL', {
+            value: `https://${distribution.distributionDomainName}`,
+            description: 'CloudFront URL (use this until custom domain is set up)',
+        });
+        new cdk.CfnOutput(this, 'CloudFrontDistributionId', {
+            value: distribution.distributionId,
+            description: 'CloudFront Distribution ID (for cache invalidation)',
+        });
+        new cdk.CfnOutput(this, 'CloudFrontDomainName', {
+            value: distribution.distributionDomainName,
+            description: 'CloudFront domain (for DNS CNAME record)',
+        });
         new cdk.CfnOutput(this, 'ApiEndpoint', { 
             value: api.apiEndpoint,
             description: 'Backend API URL',
-        });
-        new cdk.CfnOutput(this, 'WebsiteURL', { 
-            value: websiteBucket.bucketWebsiteUrl,
-            description: 'Frontend URL (S3 website)',
         });
         new cdk.CfnOutput(this, 'StorageBucketName', { 
             value: storyBucket.bucketName,

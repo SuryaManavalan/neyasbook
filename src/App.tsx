@@ -74,6 +74,7 @@ export default function App() {
     const [content, setContent] = useState<any>(null)
     const [selectedText, setSelectedText] = useState('')
     const [lastActivityTime, setLastActivityTime] = useState(Date.now());
+    const [consecutiveNudges, setConsecutiveNudges] = useState(0);
 
     const [messages, setMessages] = useState<{
         role: 'user' | 'assistant',
@@ -318,7 +319,71 @@ export default function App() {
     // Proactive Comment Logic
     const triggerProactiveComment = async (customPrompt: string) => {
         if (!currentProjectId || !currentChapterId || isThinking || persona !== 'archie') return;
-        handleSend(customPrompt); // Reuse existing handleSend
+        
+        setIsThinking(true);
+        setThinkingLines([]);
+
+        try {
+            const activeMessages = messages.slice(contextStartIndex);
+            const response = await fetch(`${API_BASE}/chat`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-project-id': currentProjectId!
+                },
+                body: JSON.stringify({
+                    messages: [...activeMessages, { role: 'user', content: customPrompt }],
+                    chapterContent: tiptapToText(content),
+                    chapterTitle: manifest?.hierarchy.flatMap((p: any) => p.children).find((c: any) => c.id === currentChapterId)?.title || 'Untitled',
+                    selectedText: '',
+                    persona: 'archie',
+                    currentChapterId,
+                    referencedEntityIds: []
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            
+            // Create assistant message with content and tool calls
+            const assistantMessage: any = {
+                role: 'assistant',
+                content: data.content || '',
+                personaId: 'archie'
+            };
+
+            // Process tool calls if present
+            if (data.toolCalls && data.toolCalls.length > 0) {
+                const toolCall = data.toolCalls[0];
+                if (toolCall.function) {
+                    try {
+                        const args = JSON.parse(toolCall.function.arguments);
+                        if (toolCall.function.name === 'patch_text') {
+                            assistantMessage.suggestion = { original: args.original, suggested: args.suggested };
+                        } else if (toolCall.function.name === 'append_text') {
+                            assistantMessage.suggestion = { original: '', suggested: args.suggested };
+                        } else if (toolCall.function.name === 'reformat_chapter') {
+                            assistantMessage.suggestion = { original: 'FULL_CHAPTER_REFORMAT', suggested: args.updated_content };
+                        }
+                    } catch (e) {
+                        console.error('Failed to parse tool call arguments:', e);
+                    }
+                }
+            }
+
+            // Only add Archie's response, not the user message
+            setMessages(prev => [...prev, assistantMessage]);
+            setConsecutiveNudges(prev => prev + 1);
+        } catch (error) {
+            console.error('Proactive comment error:', error);
+            setMessages(prev => [...prev, { role: 'assistant', content: 'The Demon is currently unavailable. Try again later.' }]);
+        } finally {
+            setIsThinking(false);
+            setThinkingLines([]);
+        }
     }
 
     // Inactivity Monitor
@@ -326,7 +391,7 @@ export default function App() {
         const interval = setInterval(() => {
             const now = Date.now();
             if (now - lastActivityTime > 5 * 60 * 1000) { // 5 minutes
-                if (currentProjectId && currentChapterId && !isThinking && !isContentLoading && content) {
+                if (currentProjectId && currentChapterId && !isThinking && !isContentLoading && content && consecutiveNudges < 2) {
                     const text = tiptapToText(content);
                     const snippet = text.slice(0, 500);
                     triggerProactiveComment(`I haven't written anything in 5 minutes. Take a look at my current progress: "${snippet}". Give me a proactive comment, critique, or nudge to keep going.`);
@@ -335,7 +400,7 @@ export default function App() {
             }
         }, 30000); // Check every 30s
         return () => clearInterval(interval);
-    }, [lastActivityTime, currentProjectId, currentChapterId, isThinking, content]);
+    }, [lastActivityTime, currentProjectId, currentChapterId, isThinking, content, consecutiveNudges]);
 
     const createNewProject = () => {
         const title = prompt("Book Title:");
@@ -464,6 +529,10 @@ export default function App() {
 
         setMessages(prev => [...prev, { role: 'user', content: cleanMsg, personaId: persona }])
 
+        // Reset nudge counter and activity time on user interaction
+        setConsecutiveNudges(0);
+        setLastActivityTime(Date.now());
+
         // Capture mentions before clearing
         const currentMentions = [...mentions];
         setMentions([])
@@ -491,66 +560,39 @@ export default function App() {
                 })
             })
 
-            const reader = response.body?.getReader()
-            if (!reader) return
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+            }
 
-            let assistantMsg = ''
-            setMessages(prev => [...prev, { role: 'assistant', content: '', personaId: persona }])
+            const data = await response.json()
+            
+            // Create assistant message with content and tool calls
+            const assistantMessage: any = {
+                role: 'assistant',
+                content: data.content || '',
+                personaId: persona
+            }
 
-            const decoder = new TextDecoder()
-            while (true) {
-                const { done, value } = await reader.read()
-                if (done) break
-
-                const chunk = decoder.decode(value)
-                const lines = chunk.split('\n')
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        try {
-                            const data = JSON.parse(line.slice(6))
-                            if (data.type === 'status') {
-                                setIsThinking(true)
-                                setThinkingLines(prev => [...new Set([...prev, data.message])])
-                            } else if (data.type === 'content') {
-                                setIsThinking(false)
-                                assistantMsg += data.delta
-                                setMessages(prev => {
-                                    if (prev.length === 0) return prev;
-                                    const next = [...prev]
-                                    const last = next[next.length - 1]
-                                    if (last.role === 'assistant') {
-                                        last.content = assistantMsg
-                                    }
-                                    return next
-                                })
-                            } else if (data.type === 'tool_call') {
-                                setMessages(prev => {
-                                    const next = [...prev]
-                                    const last = next[next.length - 1]
-                                    if (last.role === 'assistant') {
-                                        try {
-                                            const args = JSON.parse(data.arguments);
-                                            if (data.name === 'patch_text') {
-                                                last.suggestion = { original: args.original, suggested: args.suggested };
-                                            } else if (data.name === 'append_text') {
-                                                last.suggestion = { original: '', suggested: args.suggested };
-                                            } else if (data.name === 'reformat_chapter') {
-                                                last.suggestion = { original: 'FULL_CHAPTER_REFORMAT', suggested: args.updated_content };
-                                            }
-                                        } catch (e) {
-                                            // Arguments still streaming or malformed
-                                        }
-                                    }
-                                    return next
-                                })
-                            }
-                        } catch (e) {
-                            // Incomplete JSON chunk
+            // Process tool calls if present
+            if (data.toolCalls && data.toolCalls.length > 0) {
+                const toolCall = data.toolCalls[0] // Use first tool call
+                if (toolCall.function) {
+                    try {
+                        const args = JSON.parse(toolCall.function.arguments)
+                        if (toolCall.function.name === 'patch_text') {
+                            assistantMessage.suggestion = { original: args.original, suggested: args.suggested }
+                        } else if (toolCall.function.name === 'append_text') {
+                            assistantMessage.suggestion = { original: '', suggested: args.suggested }
+                        } else if (toolCall.function.name === 'reformat_chapter') {
+                            assistantMessage.suggestion = { original: 'FULL_CHAPTER_REFORMAT', suggested: args.updated_content }
                         }
+                    } catch (e) {
+                        console.error('Failed to parse tool call arguments:', e)
                     }
                 }
             }
+
+            setMessages(prev => [...prev, assistantMessage])
         } catch (error) {
             console.error('Chat Error:', error)
             setMessages(prev => [...prev, { role: 'assistant', content: 'The Demon is currently unavailable. Try again later.' }])
@@ -1273,16 +1315,19 @@ function EntityProfileView({ profile, onBack, onSave }: { profile: any, onBack: 
                     <Sparkles size={16} className="text-accent/40" />
                 </div>
                 <div className="space-y-3">
-                    {localProfile.canonicalFacts?.map((fact: string, i: number) => (
+                    {localProfile.canonicalFacts?.map((fact: any, i: number) => (
                         <div key={i} className="flex gap-3 text-serif text-ink/70 leading-relaxed">
                             <span className="text-accent">•</span>
-                            <p>{fact}</p>
+                            <p>{typeof fact === 'string' ? fact : fact.fact}</p>
                         </div>
                     ))}
                     <button
                         onClick={() => {
-                            const fact = prompt("New Canon Fact:");
-                            if (fact) updateCanon([...(localProfile.canonicalFacts || []), fact]);
+                            const factText = prompt("New Canon Fact:");
+                            if (factText) {
+                                const newFacts = [...(localProfile.canonicalFacts || []), { fact: factText }];
+                                updateCanon(newFacts);
+                            }
                         }}
                         className="text-[10px] font-bold uppercase tracking-widest text-accent hover:text-accent/80 transition-colors mt-4"
                     >

@@ -58,15 +58,24 @@ BUCKET=$(aws cloudformation describe-stacks \
 echo "📤 Uploading to S3..."
 aws s3 sync dist/ s3://$BUCKET --delete
 
-WEBSITE_URL=$(aws cloudformation describe-stacks \
+CLOUDFRONT_ID=$(aws cloudformation describe-stacks \
     --stack-name NeyasbookStack \
-    --query 'Stacks[0].Outputs[?OutputKey==`WebsiteURL`].OutputValue' \
+    --query 'Stacks[0].Outputs[?OutputKey==`CloudFrontDistributionId`].OutputValue' \
+    --output text)
+
+echo "🔄 Invalidating CloudFront cache..."
+aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths "/*" > /dev/null 2>&1 || echo "⚠️  Cache invalidation skipped"
+
+CLOUDFRONT_URL=$(aws cloudformation describe-stacks \
+    --stack-name NeyasbookStack \
+    --query 'Stacks[0].Outputs[?OutputKey==`CloudFrontURL`].OutputValue' \
     --output text)
 
 echo ""
 echo "🎉 Deployment complete!"
 echo ""
-echo "🌐 Your app: $WEBSITE_URL"
+echo "🌐 Your app: https://neyasbook.com (after DNS setup)"
+echo "🔗 CloudFront: $CLOUDFRONT_URL"
 echo "🔗 API: $API_ENDPOINT"
 echo ""
 echo "💡 First request may be slow (Lambda cold start)"
